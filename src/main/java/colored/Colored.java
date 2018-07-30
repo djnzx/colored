@@ -16,19 +16,19 @@ public class Colored {
         return Colored.build(this.msg, this.attr);
     }
 
-    public static String build(Object msg, Ansi.FgColor fg) {
-        return build(msg, Ansi.TxAttr.NONE, fg, Ansi.BgColor.NONE);
+    public static String build(Object msg, Ansi.ColorFont fg) {
+        return build(msg, Ansi.Style.NONE, fg, Ansi.ColorBack.NONE);
     }
 
-    public static String build(Object msg, Ansi.TxAttr attr, Ansi.FgColor fg) {
-        return build(msg, attr, fg, Ansi.BgColor.NONE);
+    public static String build(Object msg, Ansi.Style attr, Ansi.ColorFont fg) {
+        return build(msg, attr, fg, Ansi.ColorBack.NONE);
     }
 
     public static String build(Object msg, Attribute att) {
-        return build(msg, att.txAttr(), att.fgColor(), att.bgColor());
+        return build(msg, att.style(), att.colorFont(), att.colorBack());
     }
 
-    public static String build(Object msg, Ansi.TxAttr attr, Ansi.FgColor fg, Ansi.BgColor bg) {
+    public static String build(Object msg, Ansi.Style attr, Ansi.ColorFont fg, Ansi.ColorBack bg) {
         return String.join("",
                 new Attribute(attr, fg, bg).escapeSequence(),
                 msg.toString(),

@@ -1,75 +1,107 @@
 package colored;
 
 public class Attribute {
-    private final Ansi.TxAttr txAttr;
-    private final Ansi.FgColor fgColor;
-    private final Ansi.BgColor bgColor;
+    private final Ansi.Style style;
+    private final Ansi.ColorFont colorFont;
+    private final Ansi.ColorBack colorBack;
 
     public static final Attribute CLEAR = new Attribute();
-    public static final Attribute RED = new Attribute(Ansi.FgColor.RED);
-    public static final Attribute GREEN = new Attribute(Ansi.FgColor.GREEN);
-    public static final Attribute BLUE = new Attribute(Ansi.FgColor.BLUE);
-    public static final Attribute YELLOW = new Attribute(Ansi.FgColor.YELLOW);
-    public static final Attribute CYAN = new Attribute(Ansi.FgColor.CYAN);
-    public static final Attribute MAGENTA = new Attribute(Ansi.FgColor.MAGENTA);
+    public static final Attribute RED = new Attribute(Ansi.ColorFont.RED);
+    public static final Attribute GREEN = new Attribute(Ansi.ColorFont.GREEN);
+    public static final Attribute BLUE = new Attribute(Ansi.ColorFont.BLUE);
+    public static final Attribute YELLOW = new Attribute(Ansi.ColorFont.YELLOW);
+    public static final Attribute CYAN = new Attribute(Ansi.ColorFont.CYAN);
+    public static final Attribute MAGENTA = new Attribute(Ansi.ColorFont.MAGENTA);
 
     public Attribute() {
-        this(Ansi.TxAttr.NONE, Ansi.FgColor.NONE, Ansi.BgColor.NONE);
+        this(Ansi.Style.NONE, Ansi.ColorFont.NONE, Ansi.ColorBack.NONE);
     }
 
-    public Attribute(Ansi.FgColor fg) {
-        this(Ansi.TxAttr.NONE, fg, Ansi.BgColor.NONE);
+    public Attribute(Ansi.ColorFont fg) {
+        this(Ansi.Style.NONE, fg, Ansi.ColorBack.NONE);
     }
 
-    public Attribute(Ansi.BgColor bg) {
-        this(Ansi.TxAttr.NONE, Ansi.FgColor.NONE, bg);
+    public Attribute(Ansi.ColorBack bg) {
+        this(Ansi.Style.NONE, Ansi.ColorFont.NONE, bg);
     }
 
-    public Attribute(Ansi.TxAttr tx) {
-        this(tx, Ansi.FgColor.NONE, Ansi.BgColor.NONE);
+    public Attribute(Ansi.Style st) {
+        this(st, Ansi.ColorFont.NONE, Ansi.ColorBack.NONE);
     }
 
-    public Attribute(Ansi.TxAttr txa, Ansi.FgColor fg, Ansi.BgColor bg) {
-        this.txAttr = txa;
-        this.fgColor = fg;
-        this.bgColor = bg;
+    public Attribute(Ansi.Style st, Ansi.ColorFont fg, Ansi.ColorBack bg) {
+        this.style = st;
+        this.colorFont = fg;
+        this.colorBack = bg;
     }
 
-    public Attribute withFg(Ansi.FgColor color) {
-        return new Attribute(this.txAttr, color, this.bgColor);
+    public Attribute withColor(Ansi.ColorFont color) {
+        return new Attribute(this.style, color, this.colorBack);
     }
 
-    public Attribute withBg(Ansi.BgColor color) {
-        return new Attribute(this.txAttr, this.fgColor, color);
+    public Attribute withBackground(Ansi.ColorBack color) {
+        return new Attribute(this.style, this.colorFont, color);
     }
 
-    public Attribute withTa(Ansi.TxAttr attr) {
-        return new Attribute(attr, this.fgColor, this.bgColor);
+    public Attribute withStyle(Ansi.Style attr) {
+        return new Attribute(attr, this.colorFont, this.colorBack);
     }
 
-    public Ansi.TxAttr txAttr() {
-        return txAttr;
+    public Attribute bold() {
+        return withStyle(Ansi.Style.BOLD);
     }
 
-    public Ansi.BgColor bgColor() {
-        return bgColor;
+    public Attribute reverse() {
+        return withStyle(Ansi.Style.REVERSE);
     }
 
-    public Ansi.FgColor fgColor() {
-        return fgColor;
+    public Attribute underline() {
+        return withStyle(Ansi.Style.UNDERLINE);
+    }
+
+    public Ansi.Style style() {
+        return style;
+    }
+
+    public Ansi.ColorBack colorBack() {
+        return colorBack;
+    }
+
+    public Ansi.ColorFont colorFont() {
+        return colorFont;
     }
 
     public String escapeSequence() {
         return String.join("",
                 Ansi.PREFIX,
-                txAttr.code(), Ansi.SEPARATOR,
-                fgColor.code(), Ansi.SEPARATOR,
-                bgColor.code(),
+                style.code(), Ansi.SEPARATOR,
+                colorFont.code(), Ansi.SEPARATOR,
+                colorBack.code(),
                 Ansi.POSTFIX);
     }
 
     @Override
     public String toString() {
-        return String.format("Attribute:{txAttr=%s, fgColor=%s, bgColor=%s}", txAttr, fgColor, bgColor);
+        return String.format("Attribute:{style=%s, colorFont=%s, colorBack=%s}", style, colorFont, colorBack);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Attribute attribute = (Attribute) o;
+
+        if (style != attribute.style) return false;
+        if (colorFont != attribute.colorFont) return false;
+        return colorBack == attribute.colorBack;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = style != null ? style.hashCode() : 0;
+        result = 31 * result + (colorFont != null ? colorFont.hashCode() : 0);
+        result = 31 * result + (colorBack != null ? colorBack.hashCode() : 0);
+        return result;
     }
 }
