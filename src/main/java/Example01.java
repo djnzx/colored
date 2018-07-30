@@ -4,7 +4,7 @@ import colored.Colored;
 
 public class Example01 {
     public static void main(String[] args) {
-        Attribute red1 = new Attribute(Ansi.TxAttr.NONE, Ansi.FgColor.RED, Ansi.BgColor.NONE);
+        Attribute red1 = new Attribute(Ansi.FgColor.RED);
         Attribute red2 = new Attribute(Ansi.TxAttr.BOLD, Ansi.FgColor.RED, Ansi.BgColor.NONE);
         Attribute green1 = new Attribute(Ansi.TxAttr.UNDERLINE, Ansi.FgColor.GREEN, Ansi.BgColor.NONE);
         Attribute green2 = new Attribute(Ansi.TxAttr.LIGHT, Ansi.FgColor.GREEN, Ansi.BgColor.NONE);

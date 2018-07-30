@@ -3,6 +3,18 @@ package colored;
 import java.io.PrintStream;
 
 public class Colored {
+    private final Object msg;
+    private final Attribute attr;
+
+    public Colored(Object msg, Attribute attr) {
+        this.msg = msg;
+        this.attr = attr;
+    }
+
+    @Override
+    public String toString() {
+        return Colored.build(this.msg, this.attr);
+    }
 
     public static String build(Object msg, Ansi.FgColor fg) {
         return build(msg, Ansi.TxAttr.NONE, fg, Ansi.BgColor.NONE);
@@ -20,7 +32,7 @@ public class Colored {
         return String.join("",
                 new Attribute(attr, fg, bg).escapeSequence(),
                 msg.toString(),
-                Attribute.Clear().escapeSequence()
+                Attribute.CLEAR.escapeSequence()
         );
     }
 
