@@ -4,11 +4,11 @@ import colored.Colored;
 
 public class Example01 {
     public static void main(String[] args) {
-        Attribute red1 = new Attribute(Ansi.TxAttr.NONE, Ansi.FgColor.RED, Ansi.BgColor.NONE);
-        Attribute red2 = new Attribute(Ansi.TxAttr.BOLD, Ansi.FgColor.RED, Ansi.BgColor.NONE);
-        Attribute green1 = new Attribute(Ansi.TxAttr.UNDERLINE, Ansi.FgColor.GREEN, Ansi.BgColor.NONE);
-        Attribute green2 = new Attribute(Ansi.TxAttr.LIGHT, Ansi.FgColor.GREEN, Ansi.BgColor.NONE);
-        Attribute green3 = new Attribute(Ansi.TxAttr.REVERSE, Ansi.FgColor.GREEN, Ansi.BgColor.NONE);
+        Attribute red1 = new Attribute(Ansi.ColorFont.RED);
+        Attribute red2 = new Attribute(Ansi.Style.BOLD, Ansi.ColorFont.RED, Ansi.ColorBack.NONE);
+        Attribute green1 = new Attribute(Ansi.Style.UNDERLINE, Ansi.ColorFont.GREEN, Ansi.ColorBack.NONE);
+        Attribute green2 = new Attribute(Ansi.Style.LIGHT, Ansi.ColorFont.GREEN, Ansi.ColorBack.NONE);
+        Attribute green3 = new Attribute(Ansi.Style.REVERSE, Ansi.ColorFont.GREEN, Ansi.ColorBack.NONE);
         System.out.println();
         // way #1
         Colored.println("Hello,", red1);

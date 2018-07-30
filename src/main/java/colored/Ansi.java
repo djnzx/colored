@@ -12,7 +12,7 @@ public class Ansi {
     public static final String SEPARATOR = ";";
     public static final String POSTFIX = "m";
 
-    public enum FgColor {
+    public enum ColorFont {
         BLACK("30"),
         RED("31"),
         GREEN("32"),
@@ -25,7 +25,7 @@ public class Ansi {
 
         private final String _code;
 
-        FgColor(String code) {
+        ColorFont(String code) {
             _code = code;
         }
 
@@ -34,7 +34,7 @@ public class Ansi {
         }
     }
 
-    public enum BgColor {
+    public enum ColorBack {
         BLACK("40"),
         RED("41"),
         GREEN("42"),
@@ -47,7 +47,7 @@ public class Ansi {
 
         private final String _code;
 
-        BgColor(String code) {
+        ColorBack(String code) {
             _code = code;
         }
 
@@ -56,7 +56,7 @@ public class Ansi {
         }
     }
 
-    public enum TxAttr {
+    public enum Style {
         CLEAR("0"),
         BOLD("1"),
         LIGHT("1"),
@@ -68,7 +68,7 @@ public class Ansi {
 
         private final String _code; // Ansi escape code
 
-        TxAttr(String code) {
+        Style(String code) {
             _code = code;
         }
 
