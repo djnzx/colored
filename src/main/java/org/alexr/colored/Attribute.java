@@ -1,6 +1,7 @@
 package org.alexr.colored;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Attribute {
     private final Ansi.Style style;
@@ -83,11 +84,15 @@ public class Attribute {
             attributes.add(colorBack.code());
         }
         if (style != Ansi.Style.NONE) {
-            attributes.add(colorBack.code());
+            attributes.add(style.code());
         }
 
         return attributes.isEmpty() ? Ansi.RESET :
                 Ansi.PREFIX + String.join(Ansi.SEPARATOR, attributes)+ Ansi.POSTFIX;
+    }
+
+    public String escapeasList() {
+        return Arrays.toString(escapeSequence().getBytes());
     }
 
     @Override
