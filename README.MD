@@ -3,7 +3,7 @@ Do you want to see colored output in your console ?
 Just follow this instruction:
 
 1. download this project
-2. run `mvn clean install`
+2. run `mvn clean install` or `mvn clean source:jar install`
 3. include in your `pom.xml` following block:
 ```
         <dependency>
