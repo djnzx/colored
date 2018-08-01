@@ -19,3 +19,6 @@ in your `<dependencies>` section.
 ```System.out.println(new Colored("Hello,", Attribute.RED));```
 
 5. Enjoy!
+
+Here is an usage example
+`https://github.com/alexr007/colored-usage.git`
