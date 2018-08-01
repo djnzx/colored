@@ -17,3 +17,5 @@ in your `<dependencies>` section.
 4. use it as described in `examples folder`.
 
 ```System.out.println(new Colored("Hello,", Attribute.RED));```
+
+5. Enjoy!
