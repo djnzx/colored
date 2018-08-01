@@ -33,7 +33,6 @@ public class Colored {
                 new Attribute(attr, fg, bg).escapeSequence(),
                 msg.toString(),
                 Ansi.RESET
-                //Attribute.CLEAR.escapeSequence()
         );
     }
 
