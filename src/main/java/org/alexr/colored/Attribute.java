@@ -1,4 +1,4 @@
-package colored;
+package org.alexr.colored;
 
 public class Attribute {
     private final Ansi.Style style;

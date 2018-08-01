@@ -1,6 +1,8 @@
-import colored.Ansi;
-import colored.Attribute;
-import colored.Colored;
+package org.alexr.examples;
+
+import org.alexr.colored.Ansi;
+import org.alexr.colored.Attribute;
+import org.alexr.colored.Colored;
 
 public class Example02 {
     public static void main(String[] args) {
