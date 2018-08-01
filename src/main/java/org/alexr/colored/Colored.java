@@ -1,4 +1,4 @@
-package colored;
+package org.alexr.colored;
 
 import java.io.PrintStream;
 
