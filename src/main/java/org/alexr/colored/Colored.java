@@ -32,7 +32,8 @@ public class Colored {
         return String.join("",
                 new Attribute(attr, fg, bg).escapeSequence(),
                 msg.toString(),
-                Attribute.CLEAR.escapeSequence()
+                Ansi.RESET
+                //Attribute.CLEAR.escapeSequence()
         );
     }
 

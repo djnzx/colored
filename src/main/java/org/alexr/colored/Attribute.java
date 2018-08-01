@@ -1,5 +1,7 @@
 package org.alexr.colored;
 
+import java.util.ArrayList;
+
 public class Attribute {
     private final Ansi.Style style;
     private final Ansi.ColorFont colorFont;
@@ -35,6 +37,18 @@ public class Attribute {
         this.colorBack = bg;
     }
 
+    public Ansi.Style style() {
+        return style;
+    }
+
+    public Ansi.ColorFont colorFont() {
+        return colorFont;
+    }
+
+    public Ansi.ColorBack colorBack() {
+        return colorBack;
+    }
+
     public Attribute withColor(Ansi.ColorFont color) {
         return new Attribute(this.style, color, this.colorBack);
     }
@@ -59,25 +73,21 @@ public class Attribute {
         return withStyle(Ansi.Style.UNDERLINE);
     }
 
-    public Ansi.Style style() {
-        return style;
-    }
-
-    public Ansi.ColorBack colorBack() {
-        return colorBack;
-    }
-
-    public Ansi.ColorFont colorFont() {
-        return colorFont;
-    }
-
     public String escapeSequence() {
-        return String.join("",
-                Ansi.PREFIX,
-                style.code(), Ansi.SEPARATOR,
-                colorFont.code(), Ansi.SEPARATOR,
-                colorBack.code(),
-                Ansi.POSTFIX);
+        ArrayList<String> attributes = new ArrayList<>();
+
+        if (colorFont != Ansi.ColorFont.NONE) {
+            attributes.add(colorFont.code());
+        }
+        if (colorBack != Ansi.ColorBack.NONE) {
+            attributes.add(colorBack.code());
+        }
+        if (style != Ansi.Style.NONE) {
+            attributes.add(colorBack.code());
+        }
+
+        return attributes.isEmpty() ? Ansi.RESET :
+                Ansi.PREFIX + String.join(Ansi.SEPARATOR, attributes)+ Ansi.POSTFIX;
     }
 
     @Override

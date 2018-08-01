@@ -8,9 +8,11 @@ package org.alexr.colored;
  */
 public class Ansi {
 
-    public static final String PREFIX = "\033[";
+    //public static final String PREFIX = "\033[";
+    public static final String PREFIX = "\u001B[";
     public static final String SEPARATOR = ";";
     public static final String POSTFIX = "m";
+    public static final String RESET = PREFIX + "0" + POSTFIX;
 
     public enum ColorFont {
         BLACK("30"),
